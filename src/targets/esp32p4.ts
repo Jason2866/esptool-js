@@ -238,7 +238,6 @@ export class ESP32P4ROM extends ESP32ROM {
     return uartNo === this.UARTDEV_BUF_NO_USB_JTAG_SERIAL;
   }
 
-
   public async rtcWdtReset(loader: ESPLoader) {
     await loader.writeReg(this.RTC_CNTL_WDTWPROTECT_REG, this.RTC_CNTL_WDT_WKEY); // unlock
     await loader.writeReg(this.RTC_CNTL_WDTCONFIG1_REG, 5000); // set WDT timeout
@@ -254,5 +253,4 @@ export class ESP32P4ROM extends ESP32ROM {
       loader.hardReset();
     }
   }
-
 }
