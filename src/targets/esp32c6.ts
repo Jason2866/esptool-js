@@ -113,19 +113,14 @@ export class ESP32C6ROM extends ESP32C3ROM {
   }
 
   public async getChipDescription(loader: ESPLoader) {
-    const pkgVer = await this.getPkgVersion(loader);
-    if (pkgVer === 0) {
-      desc = "ESP32-C6";
-    } else {
-      desc = "unknown ESP32-C6";
-    }
     const chipDesc: { [key: number]: string } = {
       0: "ESP32-C6 (QFN40)",
       1: "ESP32-C6FH4 (QFN32)",
     };
+    const chipIndex = await this.getPkgVersion(loader);
     const majorRev = await this.getMajorChipVersion(loader);
     const minorRev = await this.getMinorChipVersion(loader);
-    return `${chipDesc[pkgVer] || "unknown ESP32-C6"} (revision v${majorRev}.${minorRev})`;
+    return `${chipDesc[chipIndex] || "unknown ESP32-C6"} (revision v${majorRev}.${minorRev})`;
   }
 
   public async getChipFeatures(loader: ESPLoader) {
