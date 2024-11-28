@@ -113,7 +113,6 @@ export class ESP32C6ROM extends ESP32C3ROM {
   }
 
   public async getChipDescription(loader: ESPLoader) {
-    let desc: string;
     const pkgVer = await this.getPkgVersion(loader);
     if (pkgVer === 0) {
       desc = "ESP32-C6";
