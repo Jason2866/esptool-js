@@ -130,7 +130,7 @@ export class ESP32C2ROM extends ESP32C3ROM {
     return size;
   }
 
-  public async hardReset(loader: ESPLoader){
+  public async hardReset(loader: ESPLoader) {
     return await loader.hardReset();
   }
 }
