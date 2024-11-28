@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - enhance/rtc-wdt-reset
   pull_request:
     branches:
-      - main
+      - enhance/rtc-wdt-reset
 
 jobs:
   ci:
