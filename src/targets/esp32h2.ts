@@ -66,11 +66,11 @@ export class ESP32H2ROM extends ESP32C6ROM {
     return `${chipDesc[chipIndex] || "unknown ESP32-H2"} (revision v${majorRev}.${minorRev})`;
   }
 
-  public async getChipFeatures(loader: ESPLoader) {
+  public async getChipFeatures() {
     return ["BLE", "IEEE802.15.4"];
   }
 
-  public async getCrystalFreq(loader: ESPLoader) {
+  public async getCrystalFreq() {
     // ESP32H2 XTAL is fixed to 32MHz
     return 32;
   }

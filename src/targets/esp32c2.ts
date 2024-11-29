@@ -67,7 +67,7 @@ export class ESP32C2ROM extends ESP32C3ROM {
     return desc;
   }
 
-  public async getChipFeatures(loader: ESPLoader) {
+  public async getChipFeatures() {
     return ["Wi-Fi", "BLE"];
   }
 

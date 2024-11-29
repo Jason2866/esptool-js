@@ -137,15 +137,15 @@ export class ESP32P4ROM extends ESP32ROM {
     return `${chipName} (revision v${majorRev}.${minorRev})`;
   }
 
-  public async getChipFeatures(loader: ESPLoader): Promise<string[]> {
+  public async getChipFeatures(): Promise<string[]> {
     return ["High-Performance MCU"];
   }
 
-  public async getCrystalFreq(loader: ESPLoader): Promise<number> {
+  public async getCrystalFreq(): Promise<number> {
     return 40; // ESP32P4 XTAL is fixed to 40MHz
   }
 
-  public async getFlashVoltage(loader: ESPLoader) {
+  public async getFlashVoltage() {
     return;
   }
 
@@ -181,7 +181,7 @@ export class ESP32P4ROM extends ESP32ROM {
     );
   }
 
-  public async getFlashCryptConfig(loader: ESPLoader) {
+  public async getFlashCryptConfig() {
     return; // doesn't exist on ESP32-P4
   }
 
