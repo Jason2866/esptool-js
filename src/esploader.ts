@@ -1450,8 +1450,7 @@ export class ESPLoader {
    * @param {boolean} usesUsb Is the chip using USB
    */
   async hardReset(usesUsb = false) {
-    const hardReset = new HardReset(this.transport, usesUsb); // TODO add usbOTGLogic
-    await hardReset.reset();
+    await this.hardReset(usingUsbOtg);
   }
 
   /**
