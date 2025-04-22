@@ -18,7 +18,7 @@ This repository contains a Javascript implementation of [esptool](https://github
 
 `yarn add --save esptool-js`
 
-Check an example project [here](./examples/typescript).
+Check an example project [here](https://github.com/espressif/esptool-js/tree/main/examples/typescript).
 
 **Nightly builds** for <a href="https://nightly.link/espressif/esptool-js/workflows/ci/main">ESPTOOL-JS</a>
 
@@ -80,4 +80,4 @@ If you are testing the main branch or any Pull Request (PR) artifact you can fol
 
 ## License
 
-The code in this repository is Copyright (c) 2023 Espressif Systems (Shanghai) Co. Ltd. It is licensed under Apache 2.0 license, as described in [LICENSE](LICENSE) file.
+The code in this repository is Copyright (c) 2023 Espressif Systems (Shanghai) Co. Ltd. It is licensed under Apache 2.0 license, as described in [LICENSE](https://github.com/espressif/esptool-js/blob/main/LICENSE) file.
