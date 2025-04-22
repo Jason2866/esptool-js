@@ -46,11 +46,10 @@ export class ESP32H2ROM extends ESP32C6ROM {
     return ((await loader.readReg(this.EFUSE_BLOCK1_ADDR + 4 * numWord)) >> 0) & 0x07;
   }
 
-  public async get_minorChipVersion(loader: ESPLoader) {
+  public async getMinorChipVersion(loader: ESPLoader) {
     const numWord = 3;
     return ((await loader.readReg(this.EFUSE_BLOCK1_ADDR + 4 * numWord)) >> 18) & 0x07;
   }
-
   public async getMajorChipVersion(loader: ESPLoader) {
     const numWord = 3;
     return ((await loader.readReg(this.EFUSE_BLOCK1_ADDR + 4 * numWord)) >> 21) & 0x03;
