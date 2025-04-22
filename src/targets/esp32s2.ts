@@ -300,6 +300,9 @@ export class ESP32S2ROM extends ROM {
       ) {
         // GPIO0 Low
         await this.rtcWdtReset(loader);
+      } else {
+        // Conditions not met – perform classic toggle as fallback
+        await loader.hardReset();
       }
     } else {
       await loader.hardReset();
