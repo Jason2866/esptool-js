@@ -165,51 +165,35 @@ export class ESPLoader {
     this.IS_STUB = false;
     this.FLASH_WRITE_SIZE = 0x4000;
 
-    this.transport = options.transport;
-    this.baudrate = options.baudrate;
+    this.transport = options.transport as Transport;
+    this.baudrate = options.baudrate as number;
     this.resetConstructors = {
-      classicReset: (transport, resetDelay) => new ClassicReset(transport, resetDelay),
-      customReset: (transport, sequenceString) => new CustomReset(transport, sequenceString),
-      hardReset: (transport, usingUsbOtg) => new HardReset(transport, usingUsbOtg),
-      usbJTAGSerialReset: (transport) => new UsbJtagSerialReset(transport),
+        classicReset: (transport: Transport, resetDelay: number) => new ClassicReset(transport, resetDelay),
+        customReset: (transport: Transport, sequenceString: string) => new CustomReset(transport, sequenceString),
+        hardReset: (transport: Transport, usingUsbOtg: boolean) => new HardReset(transport, usingUsbOtg),
+        usbJTAGSerialReset: (transport: Transport) => new UsbJtagSerialReset(transport),
     };
     if (options.serialOptions) {
-      this.serialOptions = options.serialOptions;
+        this.serialOptions = options.serialOptions;
     }
     if (options.romBaudrate) {
-      this.romBaudrate = options.romBaudrate;
+        this.romBaudrate = options.romBaudrate;
     }
     if (options.terminal) {
-      this.terminal = options.terminal;
-      this.terminal.clean();
+        this.terminal = options.terminal;
+        this.terminal.clean();
     }
-    if (typeof options.debugLogging !== "undefined") {
-      this.debugLogging = options.debugLogging;
+    if (typeof options.debugLogging !== 'undefined') {
+        this.debugLogging = options.debugLogging;
     }
     if (options.port) {
-      this.transport = new Transport(options.port);
+        this.transport = new Transport(options.port);
     }
 
-    if (typeof options.enableTracing !== "undefined") {
-      this.transport.tracing = options.enableTracing;
+    if (typeof options.enableTracing !== 'undefined') {
+        this.transport.tracing = options.enableTracing;
     }
-
-    if (options.resetConstructors?.classicReset) {
-      this.resetConstructors.classicReset = options.resetConstructors?.classicReset;
-    }
-    if (options.resetConstructors?.customReset) {
-      this.resetConstructors.customReset = options.resetConstructors?.customReset;
-    }
-    if (options.resetConstructors?.hardReset) {
-      this.resetConstructors.hardReset = options.resetConstructors?.hardReset;
-    }
-    if (options.resetConstructors?.usbJTAGSerialReset) {
-      this.resetConstructors.usbJTAGSerialReset = options.resetConstructors?.usbJTAGSerialReset;
-    }
-
-    this.info("esptool.js");
-    this.info("Serial port " + this.transport.getInfo());
-  }
+}
 
   _sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
