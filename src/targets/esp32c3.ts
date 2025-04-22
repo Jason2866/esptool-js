@@ -207,7 +207,8 @@ export class ESP32C3ROM extends ROM {
     if (isUsingUsbJTAGSerial) {
       await this.rtcWdtReset(loader);
     } else {
-      loader.hardReset();
+-      loader.hardReset();
++      await loader.hardReset();
     }
   }
 }
