@@ -319,8 +319,15 @@ export class ESP32S3ROM extends ROM {
       ) {
         // GPIO0 Low
         await this.rtcWdtReset(loader);
+      } else {
+        // USB in use but strap/force‑download check failed — fallback to generic reset
+        await loader.hardReset();
       }
     } else {
+      // Non‑USB path — perform generic hard reset
+      await loader.hardReset();
+    }
+  }
       await loader.hardReset();
     }
   }
