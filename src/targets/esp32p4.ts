@@ -246,11 +246,6 @@ export class ESP32P4ROM extends ESP32ROM {
       (1 << 31) | (5 << 28) | (1 << 8) | 2
     ); // enable WDT
     await loader.writeReg(this.RTC_CNTL_WDTWPROTECT_REG, 0); // lock
-
-    // give the WDT enough time to fire
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    await (loader as any)._sleep(50);
   }
 
   public async hardReset(loader: ESPLoader) {
