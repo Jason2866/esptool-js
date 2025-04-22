@@ -2,20 +2,14 @@ import { ESPError } from "./types/error.js";
 import { Data, deflate, Inflate } from "pako";
 import { Transport, SerialOptions } from "./webserial.js";
 import { ROM } from "./targets/rom.js";
+import { ClassicReset, HardReset, ResetStrategy, UsbJtagSerialReset } from "./reset.js";
 import { getStubJsonByChipName } from "./stubFlasher.js";
 import { padTo } from "./util.js";
 import { IEspLoaderTerminal } from "./types/loaderTerminal.js";
 import { LoaderOptions } from "./types/loaderOptions.js";
 import { FlashOptions } from "./types/flashOptions.js";
 import { After, Before } from "./types/resetModes.js";
-import {
-  ClassicReset,
-  CustomReset,
-  HardReset,
-  ResetConstructors,
-  ResetStrategy,
-  UsbJtagSerialReset,
-} from "./reset.js";
+import { ResetConstructors, CustomReset } from './reset.js';
 
 type FlashReadCallback = ((packet: Uint8Array, progress: number, totalSize: number) => void) | null;
 
@@ -1456,9 +1450,8 @@ export class ESPLoader {
    * @param {boolean} usesUsb Is the chip using USB
    */
   async hardReset(usesUsb = false) {
-    const hardReset = new HardReset(this.transport, usesUsb);
+    const hardReset = new HardReset(this.transport, usesUsb); // TODO add usbOTGLogic
     await hardReset.reset();
-}
   }
 
   /**
