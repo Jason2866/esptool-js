@@ -171,7 +171,7 @@ export class ESPLoader {
     this.resetConstructors = {
         classicReset: (transport: Transport, resetDelay: number) => new ClassicReset(transport, resetDelay),
         customReset: (transport: Transport, sequenceString: string) => new CustomReset(transport, sequenceString),
-        hardReset: (transport: Transport, usingUsbOtg: boolean) => new HardReset(transport, usingUsbOtg),
+        hardReset: (transport: Transport, usingUsbOtg?: boolean) => new HardReset(transport, usingUsbOtg || false),
         usbJTAGSerialReset: (transport: Transport) => new UsbJtagSerialReset(transport),
     };
     if (options.serialOptions) {
