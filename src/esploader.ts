@@ -9,6 +9,7 @@ import { IEspLoaderTerminal } from "./types/loaderTerminal.js";
 import { LoaderOptions } from "./types/loaderOptions.js";
 import { FlashOptions } from "./types/flashOptions.js";
 import { After, Before } from "./types/resetModes.js";
+import { ResetConstructors, CustomReset } from './reset.js';
 
 type FlashReadCallback = ((packet: Uint8Array, progress: number, totalSize: number) => void) | null;
 
