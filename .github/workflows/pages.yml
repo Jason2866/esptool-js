@@ -3,7 +3,7 @@ name: Deploy static content to Pages
 # Run on the main branch or on a manual trigger
 on:
   push:
-    branches: ["main"]
+    branches: ["develop"]
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
