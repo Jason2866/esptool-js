@@ -2,20 +2,13 @@ import { ESPError } from "./types/error.js";
 import { Data, deflate, Inflate } from "pako";
 import { Transport, SerialOptions } from "./webserial.js";
 import { ROM } from "./targets/rom.js";
+import { ClassicReset, CustomReset, HardReset, ResetConstructors, ResetStrategy, UsbJtagSerialReset } from "./reset.js";
 import { getStubJsonByChipName } from "./stubFlasher.js";
 import { padTo } from "./util.js";
 import { IEspLoaderTerminal } from "./types/loaderTerminal.js";
 import { LoaderOptions } from "./types/loaderOptions.js";
 import { FlashOptions } from "./types/flashOptions.js";
 import { After, Before } from "./types/resetModes.js";
-import {
-  ClassicReset,
-  CustomReset,
-  HardReset,
-  ResetConstructors,
-  ResetStrategy,
-  UsbJtagSerialReset,
-} from "./reset.js";
 
 type FlashReadCallback = ((packet: Uint8Array, progress: number, totalSize: number) => void) | null;
 
@@ -175,30 +168,30 @@ export class ESPLoader {
     this.transport = options.transport as Transport;
     this.baudrate = options.baudrate as number;
     this.resetConstructors = {
-        classicReset: (transport: Transport, resetDelay: number) => new ClassicReset(transport, resetDelay),
-        customReset: (transport: Transport, sequenceString: string) => new CustomReset(transport, sequenceString),
-        hardReset: (transport: Transport, usingUsbOtg?: boolean) => new HardReset(transport, usingUsbOtg || false),
-        usbJTAGSerialReset: (transport: Transport) => new UsbJtagSerialReset(transport),
+      classicReset: (transport: Transport, resetDelay: number) => new ClassicReset(transport, resetDelay),
+      customReset: (transport: Transport, sequenceString: string) => new CustomReset(transport, sequenceString),
+      hardReset: (transport: Transport, usingUsbOtg?: boolean) => new HardReset(transport, usingUsbOtg || false),
+      usbJTAGSerialReset: (transport: Transport) => new UsbJtagSerialReset(transport),
     };
     if (options.serialOptions) {
-        this.serialOptions = options.serialOptions;
+      this.serialOptions = options.serialOptions;
     }
     if (options.romBaudrate) {
-        this.romBaudrate = options.romBaudrate;
+      this.romBaudrate = options.romBaudrate;
     }
     if (options.terminal) {
-        this.terminal = options.terminal;
-        this.terminal.clean();
+      this.terminal = options.terminal;
+      this.terminal.clean();
     }
     if (typeof options.debugLogging !== "undefined") {
-        this.debugLogging = options.debugLogging;
+      this.debugLogging = options.debugLogging;
     }
     if (options.port) {
-        this.transport = new Transport(options.port);
+      this.transport = new Transport(options.port);
     }
 
     if (typeof options.enableTracing !== "undefined") {
-        this.transport.tracing = options.enableTracing;
+      this.transport.tracing = options.enableTracing;
     }
 }
 
