@@ -184,14 +184,14 @@ export class ESPLoader {
         this.terminal = options.terminal;
         this.terminal.clean();
     }
-    if (typeof options.debugLogging !== 'undefined') {
+    if (typeof options.debugLogging !== "undefined") {
         this.debugLogging = options.debugLogging;
     }
     if (options.port) {
         this.transport = new Transport(options.port);
     }
 
-    if (typeof options.enableTracing !== 'undefined') {
+    if (typeof options.enableTracing !== "undefined") {
         this.transport.tracing = options.enableTracing;
     }
 }
