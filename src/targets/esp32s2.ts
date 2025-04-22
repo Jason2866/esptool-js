@@ -287,6 +287,7 @@ export class ESP32S2ROM extends ROM {
     await loader.writeReg(this.RTC_CNTL_WDTCONFIG1_REG, 5000); // set WDT timeout
     await loader.writeReg(this.RTC_CNTL_WDTCONFIG0_REG, (1 << 31) | (5 << 28) | (1 << 8) | 2); //  enable WDT
     await loader.writeReg(this.RTC_CNTL_WDTWPROTECT_REG, 0); // lock
+    await loader.sleep(50);
   }
 
   public async hardReset(loader: ESPLoader) {
