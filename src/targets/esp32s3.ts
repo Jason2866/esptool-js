@@ -321,7 +321,7 @@ export class ESP32S3ROM extends ROM {
         await this.rtcWdtReset(loader);
       }
     } else {
-      loader.hardReset();
+      await loader.hardReset();
     }
   }
 }
