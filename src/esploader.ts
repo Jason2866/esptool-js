@@ -193,7 +193,7 @@ export class ESPLoader {
     if (typeof options.enableTracing !== "undefined") {
       this.transport.tracing = options.enableTracing;
     }
-}
+  }
 
   _sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
