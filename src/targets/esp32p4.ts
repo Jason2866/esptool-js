@@ -250,7 +250,7 @@ export class ESP32P4ROM extends ESP32ROM {
     if (isUsingUsbJTAGSerial) {
       await this.rtcWdtReset(loader);
     } else {
-      loader.hardReset();
+      await loader.hardReset();
     }
   }
 }
