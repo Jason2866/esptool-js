@@ -165,13 +165,13 @@ export class ESPLoader {
     this.IS_STUB = false;
     this.FLASH_WRITE_SIZE = 0x4000;
 
-    this.transport = options.transport;
-    this.baudrate = options.baudrate;
+    this.transport = options.transport as Transport;
+    this.baudrate = options.baudrate as number;
     this.resetConstructors = {
-      classicReset: (transport, resetDelay) => new ClassicReset(transport, resetDelay),
-      customReset: (transport, sequenceString) => new CustomReset(transport, sequenceString),
-      hardReset: (transport, usingUsbOtg) => new HardReset(transport, usingUsbOtg),
-      usbJTAGSerialReset: (transport) => new UsbJtagSerialReset(transport),
+      classicReset: (transport: Transport, resetDelay: number) => new ClassicReset(transport, resetDelay),
+      customReset: (transport: Transport, sequenceString: string) => new CustomReset(transport, sequenceString),
+      hardReset: (transport: Transport, usingUsbOtg?: boolean) => new HardReset(transport, usingUsbOtg || false),
+      usbJTAGSerialReset: (transport: Transport) => new UsbJtagSerialReset(transport),
     };
     if (options.serialOptions) {
       this.serialOptions = options.serialOptions;
@@ -193,22 +193,6 @@ export class ESPLoader {
     if (typeof options.enableTracing !== "undefined") {
       this.transport.tracing = options.enableTracing;
     }
-
-    if (options.resetConstructors?.classicReset) {
-      this.resetConstructors.classicReset = options.resetConstructors?.classicReset;
-    }
-    if (options.resetConstructors?.customReset) {
-      this.resetConstructors.customReset = options.resetConstructors?.customReset;
-    }
-    if (options.resetConstructors?.hardReset) {
-      this.resetConstructors.hardReset = options.resetConstructors?.hardReset;
-    }
-    if (options.resetConstructors?.usbJTAGSerialReset) {
-      this.resetConstructors.usbJTAGSerialReset = options.resetConstructors?.usbJTAGSerialReset;
-    }
-
-    this.info("esptool.js");
-    this.info("Serial port " + this.transport.getInfo());
   }
 
   _sleep(ms: number) {
@@ -1458,6 +1442,15 @@ export class ESPLoader {
     const flashid = await this.readFlashId();
     const flidLowbyte = (flashid >> 16) & 0xff;
     return this.DETECTED_FLASH_SIZES_NUM[flidLowbyte];
+  }
+
+  /**
+   * Perform a chip hard reset by setting RTS to LOW and then HIGH.
+   * @param {boolean} usesUsb Is the chip using USB
+   */
+  async hardReset(usesUsb = false) {
+    const hardReset = new HardReset(this.transport, usesUsb); // TODO add usbOTGLogic
+    await hardReset.reset();
   }
 
   /**
