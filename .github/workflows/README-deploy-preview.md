@@ -6,7 +6,6 @@ This workflow (`deploy-preview.yml`) automatically builds and deploys preview ve
 
 ### Triggering Events
 - **Pull Requests**: Triggers on `opened`, `synchronize`, and `reopened` events
-- **Branch Pushes**: Triggers on pushes to any branch except `main` (which has its own deployment workflow)
 
 ### Deployment Paths
 
